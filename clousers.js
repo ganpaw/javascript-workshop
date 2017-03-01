@@ -1,14 +1,21 @@
 // Case 1
 function greet(whattosay) {
   var myVar = "Good Morning";
+  var self = this;
   var fn = function(name) {
-    console.log(myVar + ', ' + whattosay + ' ' + name);
+    console.log(myVar + ', ' + whattosay + ' ' + name + ':' + self.message);
+    console.log(this);
+    console.log(self);
   }
   myVar = "Good Night";
   return fn;
 }
-
-var sayHello = greet('Hello');
+var person = {
+  message: "This is a message from Javascript object persom"
+}
+var sayHello = greet.call(person, 'Hello');
+//var sayHello = greet.call(window, 'Hello');
+//var sayHello = greet('Hello');
 sayHello('World');
 
 // Case 2
